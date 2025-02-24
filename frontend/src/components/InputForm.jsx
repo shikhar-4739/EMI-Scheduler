@@ -81,7 +81,7 @@ const InputForm = () => {
     console.log("Loan Details", loanDetails);
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}/generate-schedule`,
+        "https://emi-scheduler.onrender.com/generate-schedule",
         loanDetails
       );
       setSchedule(response.data.schedule);

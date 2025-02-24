@@ -78,7 +78,6 @@ const InputForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Loan Details", loanDetails);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}/generate-schedule`,

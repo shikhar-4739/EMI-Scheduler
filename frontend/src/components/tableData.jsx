@@ -9,7 +9,6 @@ import {
 } from "./ui/table";
 
 const TableData = ({ schedule, loanDetails }) => {
-  console.log(schedule);
   return (
     <div className="overflow-x-auto">
       <Table className="min-w-full">

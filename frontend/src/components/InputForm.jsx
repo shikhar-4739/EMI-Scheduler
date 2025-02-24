@@ -48,7 +48,7 @@ const InputForm = () => {
     inputParameters.forEach((param, index) => {
       doc.text(`${param[0]}: ${param[1]}`, 14, 32 + index * 10);
     });
-
+    
     const headers = [
       "Month/Year",
       "EMI",
@@ -81,7 +81,7 @@ const InputForm = () => {
     console.log("Loan Details", loanDetails);
     try {
       const response = await axios.post(
-        "https://emi-scheduler.onrender.com/generate-schedule",
+        `${import.meta.env.VITE_API_URL}/generate-schedule`,
         loanDetails
       );
       setSchedule(response.data.schedule);
@@ -95,9 +95,7 @@ const InputForm = () => {
   return (
     <div className="flex flex-col justify-center items-center container mx-auto px-4 sm:px-6 lg:px-8">
       <section className="w-full max-w-lg mx-auto p-6 bg-gray-800 border border-gray-200 rounded-lg shadow-lg ">
-        <h2 className="text-2xl md:text-4xl font-bold mb-4 text-center">
-          Loan Details
-        </h2>
+        <h2 className="text-2xl md:text-4xl font-bold mb-4 text-center">Loan Details</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="flex flex-col">
             <label htmlFor="principal" className="mb-1 font-medium">
@@ -190,31 +188,29 @@ const InputForm = () => {
         </form>
       </section>
 
-      <section className="w-full mt-10">
+      <section  className="w-full mt-10">
         <div ref={Ref} className="w-full md:w-3/4 flex flex-col mx-auto">
-          {schedule && (
-            <Charts schedule={schedule} loanDetails={loanDetails} data={data} />
-          )}
+          { schedule &&
+            <Charts schedule={schedule} loanDetails={loanDetails} data={data}/>
+          }
         </div>
       </section>
 
-      <section className="w-full mt-10">
+      <section  className="w-full mt-10">
         <div className="w-full md:w-3/4 flex flex-col mx-auto">
-          {schedule && (
-            <>
-              <div className="flex flex-row justify-between items-center mb-6">
-                <h1 className="text-xl md:text-2xl text-center mt-4">
-                  Loan Repayment Schedule
-                </h1>
-                <button
-                  onClick={downloadPDF}
-                  className=" py-2 px-4 mt-4 bg-green-500 text-white font-bold rounded hover:bg-green-600"
-                >
-                  Download
-                </button>
-              </div>
-              <TableData schedule={schedule} loanDetails={loanDetails} />
-            </>
+        {schedule && (
+          <>
+          <div className="flex flex-row justify-between items-center mb-6">
+            <h1 className="text-xl md:text-2xl text-center mt-4">Loan Repayment Schedule</h1>
+            <button
+              onClick={downloadPDF}
+              className=" py-2 px-4 mt-4 bg-green-500 text-white font-bold rounded hover:bg-green-600"
+            >
+              Download
+            </button>
+          </div>
+          <TableData schedule={schedule} loanDetails={loanDetails} />
+          </>
           )}
         </div>
       </section>

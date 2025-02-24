@@ -81,7 +81,7 @@ const InputForm = () => {
     console.log("Loan Details", loanDetails);
     try {
       const response = await axios.post(
-        "http://localhost:5000/generate-schedule",
+        "https://loan-repay-scheduler-backend.vercel.app/generate-schedule",
         loanDetails
       );
       setSchedule(response.data.schedule);
